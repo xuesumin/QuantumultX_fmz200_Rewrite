@@ -1,0 +1,21 @@
+#!name = Telegram 外链跳转 Nagram
+#!desc = 将 t.me 链接重定向到第三方客户端 Nagram
+#!author = Claude
+#!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+
+[URL Rewrite]
+# 私有频道消息 t.me/c/123/456
+^https?:\/\/t\.me\/c\/(\d+)\/(\d+) tg://privatepost?channel=$1&post=$2 302
+# 邀请链接 t.me/joinchat/xxx
+^https?:\/\/t\.me\/joinchat\/([\w\-]+) tg://join?invite=$1 302
+# 邀请链接 t.me/+xxx
+^https?:\/\/t\.me\/\+([\w\-]+) tg://join?invite=$1 302
+# 频道预览 t.me/s/username
+^https?:\/\/t\.me\/s\/(\w+) tg://resolve?domain=$1 302
+# 具体消息 t.me/username/123
+^https?:\/\/t\.me\/(\w+)\/(\d+) tg://resolve?domain=$1&post=$2 302
+# 用户/频道/群组 t.me/username
+^https?:\/\/t\.me\/(\w+) tg://resolve?domain=$1 302
+
+[MITM]
+hostname = t.me
